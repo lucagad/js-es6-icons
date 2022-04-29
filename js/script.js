@@ -153,7 +153,7 @@ iconsCollection.forEach(element => {
   iconsContainer.innerHTML += `
     <div class="col">
       <div class="card shadow-sm d-flex justify-content-center align-items-center py-4">
-        <i class="${element.family} ${element.prefix}${element.name}"></i>
+        <i class="${element.family} ${element.prefix}${element.name} color_${element.color}"></i>
 
         <div class="card-body">
           <p class="icon_name card-text text-center">${element.name}</p>
