@@ -1,10 +1,10 @@
-// **Milestone 1**
+// ** Milestone 1 ** OK
 // Partendo dalla struttura dati fornita, visualizzare in pagina un box per ogni icona, in cui è presente il nome dell’icona e l’icona stessa.
 
-// **Milestone 2**
+// ** Milestone 2 ** OK
 // Ciascuna icona ha una proprietà “color”: utilizzare questa proprietà per visualizzare le icone del colore corrispondente.
 
-// **Milestone 3**
+// ** Milestone 3 **
 // Aggiungere alla pagina una select in cui le options corrispondono ai vari tipi di icone *(animal, vegetable, user)*. Quando l’utente seleziona un tipo dalla select, visualizzare solamente le icone corrispondenti.
 
 // **BONUS**
@@ -17,13 +17,6 @@
 // Come sempre, iniziamo prima di tutto dall’analisi e comprensione della consegna. Scomponiamo il problema in micro-passaggi logici che solamente in un secondo momento trasformeremo in codice.
 
 // Le icone presenti nella struttura dati fanno riferimento alla nota libreria 
-
-// **Font Awesome**, perciò come prima cosa assicuriamoci di aver inserito il link alla cdn nell’head della pagina.
-// Dopodiché, basandoci sul codice di riferimento nel sito di Font Awesome, analizziamo come è formato il tag `<i>` di un’icona qualsiasi, in particolare **focalizziamoci sulle classi**.
-
-// Come possiamo usare i dati presenti nella nostra struttura dati per creare l’elemento html nel modo corretto e visualizzare l’icona in pagina?
-
-// Inizialmente può essere sufficiente stampare dei semplici div, senza alcuno stile, con all’interno l’icona e uno span con il nome. 
 
 // Solamente quando la parte logica è completa, ci dedichiamo al css.
 
@@ -147,10 +140,61 @@ const iconsCollection = [
 // Assegno alla costante l'elemento container in cui andranno stampate le card delle icone
 const iconsContainer = document.querySelector (".icons_catalogue");
 
-// Stampo in pagina tutti gli elementi dell'array
-iconsCollection.forEach(element => {
+// Assegno alla costante il valore dell'elemento scelto nella select
+const selectElement = document.querySelector(".select_icons");
 
-  iconsContainer.innerHTML += `
+// Varibile che contine il valore della select
+let selectValue = "";
+let iconsSelected = [];
+
+//console.log(iconsSelected);
+
+// Richiamo la funzione di stampa delle card
+stampCard(iconsCollection,iconsContainer);
+
+
+// Varia il valore della variabile al click di un nuovo elemento della select
+selectElement.addEventListener("click", function() {
+
+  // Svuoto l'array delle icone selezionate ed l'innerHTML del container
+  iconsContainer.innerHTML = "";
+  
+  // Svuoto l'array delle icone selezionate in precedenza
+  iconsSelected = [];
+  
+  selectValue = selectElement.value;
+
+  if (selectValue != "all"){
+
+    selectIcons (iconsCollection,selectValue);
+    stampCard(iconsSelected,iconsContainer);
+
+  } else {
+
+    stampCard(iconsCollection,iconsContainer);
+
+  }
+  
+
+});
+
+// Funzione che passato l'array delle icone ed il tipo da selezionare push all'interno dell'array iconsSelected gli oggetti che rispecchiano la selezione
+function selectIcons(arrayIcon,typeIcons){
+
+  iconsSelected = arrayIcon.filter((element) => {
+
+    return element.type === typeIcons;
+
+  });
+
+};
+
+// Funzione che passato un Array di oggetti ed il container stampa nel container tutti gli elementi dell'array
+function stampCard(arrayElement,container){
+  
+  arrayElement.forEach(element => {
+
+    container.innerHTML += `
     <div class="col">
       <div class="card shadow-sm d-flex justify-content-center align-items-center py-4">
         <i class="${element.family} ${element.prefix}${element.name}" style="color:${element.color};"></i>
@@ -161,6 +205,6 @@ iconsCollection.forEach(element => {
       </div>
     </div>
   `;
+  });
+};
 
-  
-});
