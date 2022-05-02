@@ -137,7 +137,7 @@ const iconsCollection = [
 	}
 ];
 
-// BONUS 2 - IN TEST
+// BONUS 2 - Nuovo array per le option da utilizzare nella select
 const selectValueOption = [];
 
 // Assegno alla costante l'elemento container in cui andranno stampate le card delle icone
@@ -189,22 +189,17 @@ selectElement.addEventListener("change", function() {
 });
 
 
-// BONUS 2 - IN TEST
+// BONUS 2 - Valori di Option dinamici in base al contenuto dell'array
 function setSelectValue(arrayElement){
 
-  const length = arrayElement.lenght;
-
   arrayElement.forEach(element => {
-    for (let i = 0; i < length; i++) {
-      console.log("Select Option --->",selectValueOption[i]);
-      console.log("Element --->",element.type);
-
-      if (selectValueOption[i] != element.type) {
+    
+      if (!selectValueOption.includes(element.type)) {
         selectValueOption.push(element.type);
+				selectElement.innerHTML += `<option value="${element.type}" >${element.type}</option>`
       }
-    }
-  });
-}
+    });
+  };
 
 
 // Funzione che passato l'array delle icone ed il tipo da selezionare push all'interno dell'array iconsSelected gli oggetti che rispecchiano la selezione
