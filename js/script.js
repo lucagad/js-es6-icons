@@ -164,7 +164,7 @@ stampCard(iconsCollection,iconsContainer);
 
 
 // Varia il valore della variabile al click di un nuovo elemento della select
-selectElement.addEventListener("click", function() {
+selectElement.addEventListener("change", function() {
 
   // Svuoto l'array delle icone selezionate ed l'innerHTML del container
   iconsContainer.innerHTML = "";
