@@ -137,11 +137,15 @@ const iconsCollection = [
 	}
 ];
 
+// BONUS 2 - IN TEST
+const selectValueOption = [];
+
 // Assegno alla costante l'elemento container in cui andranno stampate le card delle icone
 const iconsContainer = document.querySelector (".icons_catalogue");
 
 // Assegno alla costante il valore dell'elemento scelto nella select
 const selectElement = document.querySelector(".select_icons");
+
 
 // Varibile che contine il valore della select
 let selectValue = "";
@@ -149,7 +153,11 @@ let iconsSelected = [];
 
 // Richiamo la funzione di generazione dei colori random
 randomColor(iconsCollection);
-console.log(iconsCollection);
+console.log("Icon Array --->",iconsCollection);
+
+setSelectValue(iconsCollection);
+console.log("Select Option --->",selectValueOption);
+
 
 // Richiamo la funzione di stampa delle card
 stampCard(iconsCollection,iconsContainer);
@@ -180,6 +188,25 @@ selectElement.addEventListener("click", function() {
 
 });
 
+
+// BONUS 2 - IN TEST
+function setSelectValue(arrayElement){
+
+  const length = arrayElement.lenght;
+
+  arrayElement.forEach(element => {
+    for (let i = 0; i < length; i++) {
+      console.log("Select Option --->",selectValueOption[i]);
+      console.log("Element --->",element.type);
+
+      if (selectValueOption[i] != element.type) {
+        selectValueOption.push(element.type);
+      }
+    }
+  });
+}
+
+
 // Funzione che passato l'array delle icone ed il tipo da selezionare push all'interno dell'array iconsSelected gli oggetti che rispecchiano la selezione
 function selectIcons(arrayIcon,typeIcons){
 
@@ -198,7 +225,7 @@ function stampCard(arrayElement,container){
 
     container.innerHTML += `
     <div class="col">
-      <div class="card shadow-sm d-flex justify-content-center align-items-center py-4">
+      <div class="card d-flex justify-content-center align-items-center py-4">
         <i class="${element.family} ${element.prefix}${element.name}" style="color:${element.color};"></i>
 
         <div class="card-body">
